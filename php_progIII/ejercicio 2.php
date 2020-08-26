@@ -38,11 +38,11 @@ echo "Hoy es $dia de $mesIngles de $año";
 echo "<br>";
 
 //date("n") -> Dia del mes actual con formato del 1 al 12
-if (date("n") < 2 && date("n") > 0) {
+if ((date("n") == 12 && date("j") > 20) || (date("n") == 3) && date("j")< 21 || (date("n") == 1) || (date("n") == 2)) {
     echo "Estamos en Verano";
-}elseif (date("n") < 6 && date("n") > 2) {
+}elseif ((date("n") == 3 && date("j") > 20) || (date("n") == 6) && date("j")< 21 || (date("n") == 4) || (date("n") == 5)) {
     echo "Estamos en Otoño";
-}elseif (date("n") < 10 && date("n") > 6) {
+}elseif ((date("n") == 6 && date("j") > 20) || (date("n") == 9) && date("j")< 21 || (date("n") == 7) || (date("n") == 8)) {
     echo "Estamos en Invierno";
 }else{
     echo "Estamos en Primavera";
