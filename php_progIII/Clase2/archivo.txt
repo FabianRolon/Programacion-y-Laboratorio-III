@@ -1,0 +1,11 @@
+linea 1
+linea 2
+linea 3
+linea 4
+fwrite1
+fwrite1
+fwrite2
+fwrite3
+fwrite1
+fwrite2
+fwrite3 
