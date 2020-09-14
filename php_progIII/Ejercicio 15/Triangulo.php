@@ -14,14 +14,15 @@
         }
 
         public function Dibujar(){
-            for ($i=0; $i <= $this->_ladoDos ; $i++) { 
+            for ($i=0; $i <= $this->_altura ; $i++) { 
                 if($i == 0){
                     continue;
                 }else{
                     echo "<font color=\"red\"><br/></font>";
+                    $base = $this->_base - ($this->_base -$i);
                 }    
                 
-                for ($j=0; $j < $this->_ladoUno ; $j++) { 
+                for ($j=0; $j < $base ; $j++) { 
                     echo "<font color=\"$this->_color\">* </font>";
                 }
             }
