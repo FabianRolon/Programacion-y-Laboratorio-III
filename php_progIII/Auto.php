@@ -1,6 +1,8 @@
 <?php
 
-class Auto{
+require_once '/xampp/htdocs/Programacion-y-Laboratorio-III/php_progIII/ManejadorArchivos.php';
+
+class Auto extends ManejadorArchivos {
     public $_id;
     public  $_patente;
     public  $_color;
@@ -66,10 +68,14 @@ class Auto{
         return $this->_id.'*'.$this->_marca."*".$this->_color."*".$this->_precio;        
     }
 
-    public function agregarImpuestos($impuestos){
+     function agregarImpuestos($impuestos){
         $this->_precio += $impuestos;
     }
 
+    public function Save(){
+        parent::$nombreArchivo = "auto.json";
+        parent::GuardarJson($this);
+    }
 
 
 

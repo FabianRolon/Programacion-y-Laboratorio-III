@@ -2,23 +2,38 @@
 
 class ManejadorArchivos{
 
-    public static function GuardarTxt($nombreArchivo, $datos){
-        $archivo = fopen($nombreArchivo, "a");
+    protected static string $nombreArchivo;
+
+    protected function __construct($nombreArchivo)
+    {
+        $this->nombreArchivo = $nombreArchivo;
+    }
+
+    public function __set($name, $value){
+        if($name == 'nombreArchivo'){
+            $this->nombreArchivo = $value;
+        }else {
+            return "No existe la variable";
+        }
+    }
+
+    protected static function GuardarTxt($datos){
+        $archivo = fopen(self::$nombreArchivo, "a");
         $retorno = fwrite($archivo, $datos);
         fclose($archivo);
 
         return $retorno;
     }
 
-    public static function GuardarJson($nombreArchivo, $objArr){     
-        $archivo = fopen($nombreArchivo, "w");
+    protected static function GuardarJson($objArr){     
+        $archivo = fopen(self::$nombreArchivo, "w");
         $retorno = fwrite($archivo, json_encode($objArr));
         fclose($archivo);       
 
         return $retorno;       
     }
 
-    public static function AgregarJson($nombreArchivo, $objeto){
+    protected static function AgregarJson($nombreArchivo, $objeto){
         $retorno = 0;
         $arrayJson = self::LeerJson($nombreArchivo);
         if(!$arrayJson)
@@ -32,7 +47,7 @@ class ManejadorArchivos{
         return $retorno;       
     }
 
-    public static function serializar_guardar($nombreArchivo, $datos){
+    protected static function serializar_guardar($nombreArchivo, $datos){
         $archivo = fopen($nombreArchivo, "w");
         $retorno = fwrite($archivo, serialize($datos));	
         fclose($archivo);
@@ -40,7 +55,7 @@ class ManejadorArchivos{
         return $retorno;    
     }
 
-    public static function serializar_agregar($nombreArchivo, $nuevoDato){
+    protected static function serializar_agregar($nombreArchivo, $nuevoDato){
         $retorno = 0;
         $datos= self::deserializar($nombreArchivo);
         if(!$datos){
@@ -55,7 +70,7 @@ class ManejadorArchivos{
     }
 
     //Leer-----------------------------------------------------------------------------------
-    public static function LeerJson($nombreArchivo){
+    protected static function LeerJson($nombreArchivo){
         if(file_exists($nombreArchivo) && filesize($nombreArchivo)>0){
             $archivo = fopen($nombreArchivo, "r");
             $arrayJson = json_decode(fread($archivo,filesize($nombreArchivo)));
@@ -67,7 +82,7 @@ class ManejadorArchivos{
     }
 
 
-    public static function leerTodoRaw($nombreArchivo){
+    protected static function leerTodoRaw($nombreArchivo){
         if(file_exists($nombreArchivo) && filesize($nombreArchivo)>0){
             $archivo = fopen($nombreArchivo, "r");
             $retorno= fread($archivo,filesize($nombreArchivo));	                  
@@ -77,7 +92,7 @@ class ManejadorArchivos{
         return null;
     }
 
-    public static function leerTodoTxt($nombreArchivo){
+    protected static function leerTodoTxt($nombreArchivo){
         $archivo = fopen($nombreArchivo, "r");
         $retorno = array();
         while(!feof($archivo)) {
@@ -89,7 +104,7 @@ class ManejadorArchivos{
         return $retorno;
     }
 
-    public static function deserializar($nombreArchivo){
+    protected static function deserializar($nombreArchivo){
         $datosDeserializados= unserialize(self::leerTodoRaw($nombreArchivo));    //no necesita include 'Clase.php' si ya está incluido en index
         return $datosDeserializados;    //devuelve un array de objetos
     }
