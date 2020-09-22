@@ -47,26 +47,6 @@ class ManejadorArchivos{
         return $retorno;       
     }
 
-    protected static function serializar_guardar($nombreArchivo, $datos){
-        $archivo = fopen($nombreArchivo, "w");
-        $retorno = fwrite($archivo, serialize($datos));	
-        fclose($archivo);
-
-        return $retorno;
-    }
-
-    public static function serializar_agregar($nombreArchivo, $nuevoDato){
-        $retorno = 0;
-        $datos= self::deserializar($nombreArchivo);
-        if(!$datos){
-            $datos = array();
-        }
-        if(array_push($datos,$nuevoDato)>0){
-            $retorno = self::serializar_agregar($nombreArchivo, $datos);        
-        }
-        return $retorno; 
-    }
-
     protected static function LeerJson(){
         if(file_exists(self::$nombreArchivo) && filesize(self::$nombreArchivo)>0){
             $archivo = fopen(self::$nombreArchivo, "r");
@@ -89,7 +69,7 @@ class ManejadorArchivos{
         return null;
     }
 
-    protected static function leerTodoTxt($nombreArchivo){
+    protected static function LeerConSeparador($nombreArchivo){
         $archivo = fopen($nombreArchivo, "r");
         $retorno = array();
         while(!feof($archivo)) {
@@ -98,11 +78,7 @@ class ManejadorArchivos{
                 array_push($retorno,$linea);         
         }
         fclose($archivo);
-        return $retorno;
-    }
-
-    public static function deserializar($nombreArchivo){
-        $datosDeserializados= unserialize(self::leerTodoRaw($nombreArchivo));    //no necesita include 'Clase.php' si ya está incluido en index
-        return $datosDeserializados;    //devuelve un array de objetos
+        return $retorno;  
+     }
     }
 }
