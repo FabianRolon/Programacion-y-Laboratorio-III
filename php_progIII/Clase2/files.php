@@ -1,6 +1,7 @@
 <?php
 
 require_once '/xampp/htdocs/Programacion-y-Laboratorio-III/php_progIII/Auto.php';
+require_once '/xampp/htdocs/Programacion-y-Laboratorio-III/php_progIII/ManejadorArchivos.php';
 
 //$auto = new Auto('Volkswagen', 'Gris', rand(100000, 1000000));
 
@@ -47,6 +48,7 @@ foreach ($listaAutosDecodificada as $value) {
    $instanciaAuto = new Auto($value->_id, $value->_patente, $value->_color, $value->_precio, $value->_marca, $value->_fecha);
    array_push($arrayDeAutos, $instanciaAuto);
 }
+
 echo "<pre>";
 var_dump($arrayDeAutos);
 echo "</pre>";
