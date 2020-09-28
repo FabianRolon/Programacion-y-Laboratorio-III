@@ -1,0 +1,1 @@
+a:3:{i:0;O:7:"Usuario":3:{s:5:"email";s:14:"admin@mail.com";s:8:"password";s:3:"123";s:4:"tipo";s:5:"admin";}i:1;O:7:"Usuario":3:{s:5:"email";s:13:"user@mail.com";s:8:"password";s:3:"123";s:4:"tipo";s:5:"admin";}i:2;O:7:"Usuario":3:{s:5:"email";s:20:"laviejaloca@mail.com";s:8:"password";s:3:"123";s:4:"tipo";s:4:"user";}}
