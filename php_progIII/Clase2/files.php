@@ -30,7 +30,15 @@ while (!feof($archivo)) {
 }
 
 $close = fclose($archivo);
+$stringJson = json_encode($listaDeAutos);
 echo json_encode($listaDeAutos);
+$deco = (array)json_decode($stringJson);
+echo '<br>';
+echo '<br>';
+echo '<br>';
+echo '<br>';
+var_dump($deco);
+
 
 echo "<pre>";
 //var_dump($listaDeAutos);

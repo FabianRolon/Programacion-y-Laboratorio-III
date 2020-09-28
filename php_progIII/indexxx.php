@@ -1,10 +1,40 @@
 <?php
 
 require_once './Auto.php';
+require './vendor/autoload.php';
 
 //var_dump($_GET);
 //var_dump($_POST);
 //var_dump($_SERVER);
+use \Firebase\JWT\JWT;
+
+$key = "example_key";
+$payload = array(
+    "iss" => "http://example.org",
+    "aud" => "http://example.com",
+    "iat" => 1356999524,
+    "nbf" => 1357000000,
+    "email" => "nombre@gmail.com",
+    "type" => "admin"
+);
+
+/**
+ * IMPORTANT:
+ * You must specify supported algorithms for your application. See
+ * https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40
+ * for a list of spec-compliant algorithms.
+ */
+$jwt = JWT::encode($payload, $key);
+$token = $_SERVER['HTTP_TOKEN']; //get_headers("");
+
+try {
+    $decoded = JWT::decode($token, $key, array('HS256')); 
+} catch (\Throwable $th) {
+    echo "Error";
+}
+
+
+print_r($decoded);  
 
 $method = $_SERVER['REQUEST_METHOD'];
 $pathInfo = $_SERVER['PATH_INFO']; 
